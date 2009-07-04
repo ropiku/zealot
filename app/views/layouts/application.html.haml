@@ -1,6 +1,7 @@
 !!!
 %head
   %title= "Penis #{@page_title}"
+<<<<<<< HEAD:app/views/layouts/application.html.haml
   = stylesheet_link_tag "reset", "style"
   = yield :head
 %body
@@ -10,4 +11,10 @@
   = yield :layout
   / javscript
   = javascript_include_tag "jquery-1.3.2"
+=======
+  = yield :head
+%body
+
+  = yield :layout
+>>>>>>> Minimal layout:app/views/layouts/application.html.haml
   = yield :js
