@@ -3,3 +3,9 @@ Factory.define :user do |u|
   u.sequence(:nickname) {|n| "user#{n}"}
   u.sequence(:email) {|n| "email{n}@example.com" }
 end
+
+Factory.define :spot do |s|
+  s.name "Fifi"
+  s.latitude 10
+  s.longitude 20
+end
