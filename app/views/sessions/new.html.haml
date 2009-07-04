@@ -1,0 +1,12 @@
+%h1
+  Login
+  
+= logged_in?
+  
+#login
+  -form_tag(session_path) do
+    %p
+      <label for="openid_url">OpenID:</label>
+      =text_field_tag 'openid_url'
+    %p= submit_tag 'Sign in'
+    
