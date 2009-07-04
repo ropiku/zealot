@@ -2,6 +2,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :spots
   map.root :controller => "spots"
   
+  map.resources :tags
+  
   map.resource :session
   map.open_id_complete 'session', :controller => "sessions", :action => "create", :requirements => { :method => :get }
   

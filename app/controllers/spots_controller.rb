@@ -18,6 +18,7 @@ class SpotsController < ApplicationController
       end
 
       format.js do
+        @spot.save
         head :created
       end
     end

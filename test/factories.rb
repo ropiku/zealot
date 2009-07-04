@@ -13,4 +13,9 @@ end
 Factory.define :rating do |r|
   r.association :user, :factory => :user
   r.association :spot, :factory => :spot
+  r.rating rand(4) + 1
+end
+
+Factory.define :tag do |t|
+  t.sequence(:name) {|n| "tag#{n}"}
 end

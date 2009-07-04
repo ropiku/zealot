@@ -1,0 +1,9 @@
+-if @tag
+  %h2
+    =@tag.name
+  %ul
+    -@tag.spots.each do |spot|
+      %li
+        =spot.name
+-else
+  %h2 Not found
