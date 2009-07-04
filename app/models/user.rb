@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   
   has_many :spots
+  has_many :ratings
   
   def self.from_remember_token(token)
     first(:conditions => ["remember_token = ? AND remember_token_expires_at > ?", token, Time.now])
