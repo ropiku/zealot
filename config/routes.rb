@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :spots
+  map.resources :spots, :collection => {:search => :get}
   map.root :controller => "spots"
   
   map.resources :tags

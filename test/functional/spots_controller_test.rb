@@ -44,4 +44,26 @@ class SpotsControllerTest < ActionController::TestCase
 
     should_respond_with :created
   end
+  
+  context "#get" do
+    setup do
+      @spot = Factory.create(:spot)
+      get :show, :id => @spot.id
+    end
+    
+    should_respond_with :success
+    should_render_template :show
+    should_assign_to :spot
+  end
+  
+  context "#search" do
+    setup do
+      @spot = Factory.create(:spot)
+      get :search, :q => @spot.name
+    end
+    
+    should_respond_with :success
+    should_render_template :search
+    should_assign_to :spots
+  end
 end

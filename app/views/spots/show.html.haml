@@ -1,0 +1,14 @@
+%h2
+  =@spot.name
+#description
+  =@spot.description
+  
+#rating
+  -if r = @spot.rating
+    == Rated #{r} out of 5
+  -else
+    Not rated
+
+#tags
+  Tags:
+  =@spot.tags.collect{|tag| link_to tag.name, tag_path(tag.name)}.join(', ')

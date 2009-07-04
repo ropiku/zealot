@@ -4,6 +4,6 @@
   %ul
     -@tag.spots.each do |spot|
       %li
-        =spot.name
+        =link_to spot.name, spot
 -else
   %h2 Not found

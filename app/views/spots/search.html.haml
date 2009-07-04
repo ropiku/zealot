@@ -1,0 +1,6 @@
+%h2
+  == Searched for #{params[:q]}
+%ul
+  -@spots.each do |spot|
+    %li
+      =link_to spot.name, spot

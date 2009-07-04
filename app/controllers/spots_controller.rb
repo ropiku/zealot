@@ -1,8 +1,12 @@
 class SpotsController < ApplicationController
-  before_filter :login_required, :except => [:index, :show]
+  before_filter :login_required, :except => [:index, :show, :search]
   
   def index
     @spots = Spot.all
+  end
+  
+  def show
+    @spot = Spot.find params[:id]
   end
   
   def create
@@ -26,5 +30,10 @@ class SpotsController < ApplicationController
   
   def new
     @spot = current_user.spots.new
+  end
+  
+  def search
+    #TODO replace with sphinx for more speed
+    @spots = Spot.all :conditions => ["name LIKE ?", params[:q]]
   end
 end
