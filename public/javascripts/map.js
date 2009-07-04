@@ -67,12 +67,49 @@ Zealot.Map = new (function() {
     self.spots.push(spot);
   }
 
+  function serializeNewMarker() {
+    return { 
+      latitude: self.newMarker.YGeoPoint.Lat,
+      longitude: self.newMarker.YGeoPoint.Lon,
+      name: "The new marker",
+      tags: "poop, fish"
+    }
+  }
+
+  function serialize(obj, prefix) {
+    function namify(name) {
+      if ( prefix == null ) {
+        return name;
+      } else {
+        return prefix + '[' + i + ']';
+      }
+    }
+
+    var rVal = [];
+    for ( i in obj ) {
+      if ( typeof obj[i] == 'object' ) {
+        rVal.push(serialize(obj[i], namify(i)));
+      } else {
+        rVal.push(namify(i)+'=' + encodeURIComponent(obj[i]));
+      }
+    }
+    return rVal.join('&');
+  }
+
+
   this.setNewSpotMode = function() {
     YEvent.Capture(self.map, EventsList.MouseClick, createMarkerCallback);
   }
 
   this.unsetNewSpotMode = function() {
     YEvent.Remove(self.map, EventsList.MouseClick, createMarkerCallback);
+  }
+
+  this.saveNewSpot = function() {
+    console.log(window.AUTH_TOKEN);
+    var spot = serializeNewMarker();
+    console.log(serialize({ authenticity_token: window.AUTH_TOKEN, spot: spot }));
+    $.post('/spots', serialize({ authenticity_token: window.AUTH_TOKEN, spot: spot }), function() { console.log(arguments) })
   }
 
   if ( ZealotSpots != null ) {

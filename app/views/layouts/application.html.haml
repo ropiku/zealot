@@ -2,6 +2,8 @@
 %head
   %title= "Penis #{@page_title}"
   = stylesheet_link_tag "reset", "style"
+  = javascript_tag do
+    == window.AUTH_TOKEN = "#{form_authenticity_token}";
   = yield :head
 %body
   %h1 ZEROT
