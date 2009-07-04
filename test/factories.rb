@@ -9,3 +9,8 @@ Factory.define :spot do |s|
   s.latitude 10
   s.longitude 20
 end
+
+Factory.define :rating do |r|
+  r.association :user, :factory => :user
+  r.association :spot, :factory => :spot
+end
