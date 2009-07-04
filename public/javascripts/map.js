@@ -2,6 +2,7 @@ var Zealot = {};
 
 Zealot.Map = new (function() {
   var self = this;
+  var newSpotMode = false;
   this.spots = [];
 
   this.map = new YMap($('#map')[0]);
@@ -43,7 +44,7 @@ Zealot.Map = new (function() {
 
   function createMarkerCallback(_e, _c){  
     var currentGeoPoint = new YGeoPoint( _c.Lat, _c.Lon);  
-    if ( self.newMarker === undefined ) {
+    if ( self.newMarker == null ) {
       self.newMarker = addMarker(currentGeoPoint, { newSpot: true });  
     } else {
       self.newMarker.setYGeoPoint(currentGeoPoint);
@@ -96,13 +97,28 @@ Zealot.Map = new (function() {
     return rVal.join('&');
   }
 
+  function removeNewMarker() {
+    self.map.removeOverlay(self.newMarker);
+    self.newMarker = null;
+  }
+
+  this.toggleNewSpotMode = function() {
+    if ( newSpotMode ) {
+      self.unsetNewSpotMode();
+    } else {
+      self.setNewSpotMode();
+    }
+  }
 
   this.setNewSpotMode = function() {
+    newSpotMode = true;
     YEvent.Capture(self.map, EventsList.MouseClick, createMarkerCallback);
   }
 
   this.unsetNewSpotMode = function() {
+    newSpotMode = false;
     YEvent.Remove(self.map, EventsList.MouseClick, createMarkerCallback);
+    removeNewMarker();
   }
 
   this.saveNewSpot = function(callback) {

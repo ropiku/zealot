@@ -6,8 +6,8 @@
     == window.AUTH_TOKEN = "#{form_authenticity_token}";
   = yield :head
 %body
-  %h1 ZEROT
   #header
+    %h1 ZEROT
     -if logged_in?
       == Welcome #{current_user.nickname || current_user.identity_url} | 
       =link_to "Logout", logout_path
@@ -19,3 +19,5 @@
   / javascript
   = javascript_include_tag "jquery-1.3.2"
   = yield :js
+  #footer
+    %span Pickles are the delicious

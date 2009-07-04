@@ -1,7 +1,49 @@
-h1 {
+#header {
   background-color: pink;
   color: yellow;
-  font-size: 2em; }
+  border-bottom: .5em solid #F00FFA; }
+
+h1 {
+  font-size: 2em;
+  display: inline; }
 
 html, body {
-  background-color: aqua; }
+  background-color: #fef;
+  font-family: Georgia; }
+
+a {
+  color: magenta;
+  text-decoration: none;
+  padding: .15em;
+  margin: .5em; }
+
+a:hover {
+  color: #0ADDAC;
+  background-color: #EEE;
+  -moz-border-radius: .3em; }
+
+#menu {
+  margin: 0em 2em 2em;
+  padding-top: .5em; }
+  #menu form {
+    padding: .5em;
+    background-color: #FFF;
+    color: #AAF;
+    -moz-border-radius: .3em; }
+
+#search {
+  float: right;
+  overflow: hidden;
+  padding: 1em;
+  background-color: #FAF;
+  -moz-border-radius-topleft: .3em;
+  -moz-border-radius-bottomleft: .3em; }
+  #search form {
+    margin-bottom: 1em; }
+
+#footer {
+  clear: both;
+  padding-top: 1em;
+  font-size: .7em;
+  text-align: center;
+  color: magenta; }

@@ -12,11 +12,14 @@
       %label{:for => "Description"}Description
       %input{:type => "text", :name => "description", :id => "description"}
       = submit_tag
-#map
+      %input{:type => "reset", :value => "NVM LOL"}
+
+#map_container
+  #map
 
 #search
   - form_tag({}, :id => "search_form") do
     %label{:for => "search_string"}Search
     %input{:type => "text", :name => "search_string", :id => "search_string"}
-    = submit_tag
+    = submit_tag "Search"
   %ul#matches

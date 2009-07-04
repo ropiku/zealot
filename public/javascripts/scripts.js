@@ -1,11 +1,10 @@
 $('a[href=#new_spot]').click( function() {
-  Zealot.Map.setNewSpotMode();
-  $('#new_spot').show();
+  Zealot.Map.toggleNewSpotMode();
+  $('#new_spot').toggle();
   return false;
 });
 
 $('#new_spot').submit( function() {
-
   Zealot.Map.saveNewSpot( function() {
     console.log(arguments);
     $('#new_spot').hide();
@@ -13,6 +12,11 @@ $('#new_spot').submit( function() {
   
   return false;
 });
+
+$('#new_spot input[type=reset]').click( function() {
+  $('#new_spot').hide();
+  Zealot.Map.unsetNewSpotMode();
+})
 
 $('#search_form').submit( function() {
   var term = document.getElementById('search_string').value;
