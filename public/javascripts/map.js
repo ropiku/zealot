@@ -2,6 +2,9 @@
   var map = new YMap($('#map')[0]);
   map.setMapType(YAHOO_MAP_REG);
   map.drawZoomAndCenter("Bucharest", 3);
+  map.addZoomLong();  
+  map.addPanControl();  
+
 
   function createCustomMarkerImage(){
     var myImage = new YImage();
