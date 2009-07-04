@@ -71,8 +71,8 @@ Zealot.Map = new (function() {
     return { 
       latitude: self.newMarker.YGeoPoint.Lat,
       longitude: self.newMarker.YGeoPoint.Lon,
-      name: "The new marker",
-      tags: "poop, fish"
+      name: document.getElementById('name').value,
+      tags_string: document.getElementById('description').value
     }
   }
 
@@ -105,11 +105,9 @@ Zealot.Map = new (function() {
     YEvent.Remove(self.map, EventsList.MouseClick, createMarkerCallback);
   }
 
-  this.saveNewSpot = function() {
-    console.log(window.AUTH_TOKEN);
+  this.saveNewSpot = function(callback) {
     var spot = serializeNewMarker();
-    console.log(serialize({ authenticity_token: window.AUTH_TOKEN, spot: spot }));
-    $.post('/spots', serialize({ authenticity_token: window.AUTH_TOKEN, spot: spot }), function() { console.log(arguments) })
+    $.post('/spots', serialize({ authenticity_token: window.AUTH_TOKEN, spot: spot }), callback, "json");
   }
 
   if ( ZealotSpots != null ) {

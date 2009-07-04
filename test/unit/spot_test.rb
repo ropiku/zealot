@@ -28,10 +28,10 @@ class SpotTest < ActiveSupport::TestCase
     end
 
     should "not die when setting the same tag all over again" do
-      @spot.tags_string = "poop,happy"
+      @spot.tags_string = "poop, happy"
       @spot.save
 
-      @spot.tags_string = "poop,happy"
+      @spot.tags_string = "poop, happy"
       @spot.save
     end
   end

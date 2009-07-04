@@ -5,7 +5,18 @@
   = javascript_include_tag "map", "scripts"
 #menu
   %a{ :href => "#new_spot" }New spot
+  .new_spot
+    - form_tag({}, :id => "new_spot", :style => "display: none") do
+      %label{:for => "name"}Name
+      %input{:type => "text", :name => "name", :id => "name"}
+      %label{:for => "Description"}Description
+      %input{:type => "text", :name => "description", :id => "description"}
+      = submit_tag
 #map
 
-%h1
-  Index bitches !
+#search
+  - form_tag({}, :id => "search_form") do
+    %label{:for => "search_string"}Search
+    %input{:type => "text", :name => "search_string", :id => "search_string"}
+    = submit_tag
+  %ul#matches

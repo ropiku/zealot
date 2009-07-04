@@ -34,6 +34,13 @@ class SpotsController < ApplicationController
   
   def search
     #TODO replace with sphinx for more speed
-    @spots = Spot.all :conditions => ["name LIKE ?", params[:q]]
+    @spots = Spot.all :conditions => ["name LIKE ?", "%#{params[:q]}%"]
+
+    respond_to do |format|
+      format.html {}
+      format.js do
+        render :json => @spots.to_json
+      end
+    end
   end
 end

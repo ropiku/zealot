@@ -15,11 +15,11 @@ class Spot < ActiveRecord::Base
   
   def tags_string=(string)
     return if string.nil?
-    tg = []
+    self.tags.delete_all
+
     string.split(',').each do |tag|
-      tg << Tag.find_or_create_by_name(tag.strip)
+      self.tags << Tag.find_or_create_by_name(tag.strip)
     end
-    self.tags = tg
   end
   
   def tags_string
