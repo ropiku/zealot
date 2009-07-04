@@ -6,4 +6,5 @@ class SpotTest < ActiveSupport::TestCase
   should_have_db_column :longitude
 
   should_have_and_belong_to_many :tags
+  should_belong_to :user
 end

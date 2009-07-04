@@ -1,4 +1,6 @@
 class SpotsController < ApplicationController
+  before_filter :login_required, :only => [:create]
+  
   def index
     @spots = Spot.all
   end

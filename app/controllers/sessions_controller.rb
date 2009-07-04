@@ -4,11 +4,16 @@ class SessionsController < ApplicationController
   end
   
   def create
+    redirect_to home_path if logged_in?
     open_id_authentication(params[:openid_url])
   end
   
   def destroy
-    
+    self.current_user.forget_me if logged_in?
+    cookies.delete :remember_token
+    reset_session
+    flash[:notice] = "You have been logged out."
+    redirect_back_or_default('/')
   end
   
   protected

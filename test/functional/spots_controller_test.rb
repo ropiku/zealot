@@ -13,6 +13,7 @@ class SpotsControllerTest < ActionController::TestCase
 
   context "html #create" do
     setup do
+      sign_in_as Factory.create(:user)
       post :create, :spot => { :name => "Gigel", :latitude => 10, :longitude => 20 }
       @spot = Spot.last
     end
@@ -30,6 +31,7 @@ class SpotsControllerTest < ActionController::TestCase
 
   context "xhr #create" do
     setup do
+      sign_in_as Factory.create(:user)
       xhr :post, :create, :spot => { :name => "Gigel", :latitude => 10, :longitude => 20 }
       @spot = Spot.last
     end
