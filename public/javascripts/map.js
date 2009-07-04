@@ -25,11 +25,22 @@
   }
 
 
-  function myCallback(_e, _c){  
+  function createMarkerCallback(_e, _c){  
     var mapCoordCenter = map.convertLatLonXY(map.getCenterLatLon());  
     currentGeoPoint = new YGeoPoint( _c.Lat, _c.Lon);  
     addMarker(currentGeoPoint);  
   }
 
-  YEvent.Capture(map, EventsList.MouseClick, myCallback);  
+  function addSpots(spots) {
+    var latlng;
+    for ( spot in spots ) {
+      latlng = new YGeoPoint(spot.latitude, spot.longitude);
+      addMarker(latlng);
+    }
+  }
+
+  YEvent.Capture(map, EventsList.MouseClick, createMarkerCallback);
+  if ( ZealotSpots != null ) {
+    addSpots(ZealotSpots);
+  }
 })();

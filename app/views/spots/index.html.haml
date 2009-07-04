@@ -1,7 +1,8 @@
 - content_for :js do
+  = javascript_tag do
+    == var ZealotSpots = #{@spots.to_json};
   == <script type="text/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.8&appid=A89ep3fV34E7xmR7phcrGoALC_7by21vdTDllAAXHkWIT6ON_iQJbI6LOCndWbN0"></script>
   = javascript_include_tag "map"
-
 #map
 
 %h1
