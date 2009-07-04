@@ -1,9 +1,14 @@
-(function() {
-  var map = new YMap($('#map')[0]);
-  map.setMapType(YAHOO_MAP_REG);
-  map.drawZoomAndCenter("Bucharest", 3);
-  map.addZoomLong();  
-  map.addPanControl();  
+var Zealot = {};
+
+Zealot.Map = new (function() {
+  var self = this;
+  this.spots = [];
+
+  this.map = new YMap($('#map')[0]);
+  this.map.setMapType(YAHOO_MAP_REG);
+  this.map.drawZoomAndCenter("Bucharest", 3);
+  this.map.addZoomLong();  
+  this.map.addPanControl();  
 
 
   function createCustomMarkerImage(){
@@ -14,14 +19,15 @@
     return myImage;
   }
 
-  function addMarker(geoPoint) {
+  function addMarker(geoPoint, options) {
+    options = options || {};
     var newMarker = new YMarker(geoPoint, createCustomMarkerImage());
-    newMarker.addAutoExpand("Add a Label to a Marker for this Effect");
-    var markerMarkup = "<b>You can add markup this</b>";
-    markerMarkup += "<i> easy</i>";
+    newMarker.addAutoExpand(options.name);
+    var markerMarkup = options.tags;
 
-    map.addOverlay(newMarker);
-    console.log(geoPoint);
+    self.map.addOverlay(newMarker);
+
+    return newMarker;
   }
 
 
@@ -32,15 +38,26 @@
   }
 
   function addSpots(spots) {
-    var latlng;
-    for ( spot in spots ) {
-      latlng = new YGeoPoint(spot.latitude, spot.longitude);
-      addMarker(latlng);
+    var lspots = spots.length;
+    for ( i = 0; i < lspots; i++ ) {
+      spot = spots[i].spot;
+      addSpot(spot);
     }
   }
 
-  YEvent.Capture(map, EventsList.MouseClick, createMarkerCallback);
+  function addSpot(spot) {
+    var latlng = new YGeoPoint(spot.latitude, spot.longitude);
+
+    
+    var marker = addMarker(latlng, spot);
+    spot.marker = marker;
+
+    self.spots.push(spot);
+  }
+
   if ( ZealotSpots != null ) {
     addSpots(ZealotSpots);
   }
+
+  return this;
 })();

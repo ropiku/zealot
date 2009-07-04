@@ -6,8 +6,8 @@ end
 
 Factory.define :spot do |s|
   s.name "Fifi"
-  s.latitude 44.43 + rand / 100
-  s.longitude 26.1 + rand / 10
+  s.latitude 44.43644582483315 + rand / 100
+  s.longitude 26.105189323425293 + rand / 10
 end
 
 Factory.define :rating do |r|
