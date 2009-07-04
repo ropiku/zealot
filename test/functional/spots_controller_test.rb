@@ -13,7 +13,8 @@ class SpotsControllerTest < ActionController::TestCase
 
   context "html #create" do
     setup do
-      sign_in_as Factory.create(:user)
+      @current_user = Factory.create(:user)
+      sign_in_as @current_user
       post :create, :spot => { :name => "Gigel", :latitude => 10, :longitude => 20 }
       @spot = Spot.last
     end
@@ -26,12 +27,14 @@ class SpotsControllerTest < ActionController::TestCase
       assert_equal("Gigel", @spot.name)
       assert_equal(10, @spot.latitude)
       assert_equal(20, @spot.longitude)
+      assert_equal(@current_user, @spot.user)
     end
   end
 
   context "xhr #create" do
     setup do
-      sign_in_as Factory.create(:user)
+      @current_user = Factory.create(:user)
+      sign_in_as @current_user
       xhr :post, :create, :spot => { :name => "Gigel", :latitude => 10, :longitude => 20 }
       @spot = Spot.last
     end
@@ -40,6 +43,7 @@ class SpotsControllerTest < ActionController::TestCase
       assert_equal("Gigel", @spot.name)
       assert_equal(10, @spot.latitude)
       assert_equal(20, @spot.longitude)
+      assert_equal(@current_user, @spot.user)
     end
 
     should_respond_with :created

@@ -10,7 +10,7 @@ class SpotsController < ApplicationController
   end
   
   def create
-    @spot = Spot.new(params[:spot])
+    @spot = current_user.spots.new(params[:spot])
 
     respond_to do |format|
       format.html do
